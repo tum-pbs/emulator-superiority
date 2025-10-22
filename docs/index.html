@@ -1,0 +1,222 @@
+<!<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Neural Emulator Superiority: When Machine Learning for PDEs Surpasses its Training Data</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="static/css/academicons.min.css">
+        <link rel="stylesheet" href="static/css/fontawesome.min.css">
+        <script src="static/js/all.min.js"></script>
+        <script src="static/js/bulma-carousel.min.js"></script>
+
+
+        <link rel="stylesheet" href="static/css/style.css">
+        <script src="static/js/script.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+                    <a class="navbar-item" href="https://fkoehler.site/">
+                        <span class="icon">
+                            <i class="fas fa-home"></i>
+                        </span>
+                    </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            More Research
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="https://ge.in.tum.de/publications/">
+                                TUM Thuerey Group
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered">
+                        <div class="column has-text-centered">
+                            <h1 class="title is-1 is-size-3-mobile publication-title">Neural Emulator Superiority: When Machine Learning for PDEs Surpasses its Training Data</h1>
+                            <h2 class="subtitle is-4 opacity-1" style="margin-top: 1rem;opacity:0.7">NeurIPS 2025</h2>
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block">
+                                    <a href="https://fkoehler.site/"> Felix Köhler</a>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://ge.in.tum.de/about/n-thuerey/">
+                                        Nils Thuerey</a>
+                                </span>
+                            </div>
+
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block">Technical University of Munich</span>
+                            </div>
+
+                            <div class="column has-text-centered">
+                                <div class="publication-links">
+                                    <!-- PDF Link. -->
+                                    <!-- <span class="link-block">
+                                        <a href="https://arxiv.org/pdf/2411.00180"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </span>
+                                            <span>Paper</span>
+                                        </a>
+                                    </span>
+                                    <span class="link-block">
+                                        <a href="https://arxiv.org/abs/2411.00180"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="ai ai-arxiv"></i>
+                                            </span>
+                                            <span>arXiv</span>
+                                        </a>
+                                    </span> -->
+                                    <span class="link-block">
+                                        <a href="https://github.com/tum-pbs/emulator-superiority"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fab fa-github"></i>
+                                            </span>
+                                            <span>Code</span>
+                                        </a>
+                                    </span>
+                                    <!-- Poster Link. -->
+                                    <!-- <span class="link-block">
+                                        <a href="https://github.com/tum-pbs/apebench-paper/blob/main/apebench_poster.pdf"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fas fa-newspaper"></i>
+                                            </span>
+                                            <span>Poster</span>
+                                        </a>
+                                    </span> -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero teaser is-light">
+            <div class="hero-body">
+                <div class="container">
+                    <div id="teaser">
+                        <img src="static/img/teaser_new_transparant.png"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- TL;DR. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">TL;DR</h2>
+                        <div class="content has-text-justified">
+                        We show that neural networks can outperform the numerical simulator
+                        that produced their training data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- Abstract. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Abstract</h2>
+                        <div class="content has-text-justified">
+                            Neural operators or emulators for PDEs trained on
+                            data from numerical solvers are conventionally
+                            assumed to be limited by their training data's
+                            fidelity. We challenge this assumption by
+                            identifying "emulator superiority," where neural
+                            networks trained purely on low-fidelity solver data
+                            can achieve higher accuracy than those solvers when
+                            evaluated against a higher-fidelity reference. Our
+                            theoretical analysis reveals how the interplay
+                            between emulator inductive biases, training
+                            objectives, and numerical error characteristics
+                            enables superior performance during multi-step
+                            rollouts. We empirically validate this finding
+                            across different PDEs using standard neural
+                            architectures, demonstrating that emulators can
+                            implicitly learn dynamics that are more regularized
+                            or exhibit more favorable error accumulation
+                            properties than their training data, potentially
+                            surpassing training data limitations and mitigating
+                            numerical artifacts. This work prompts a
+                            re-evaluation of emulator benchmarking, suggesting
+                            neural emulators might achieve greater physical
+                            fidelity than their training source within specific
+                            operational regimes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="BibTeX">
+            <div class="container is-max-desktop content">
+                <h2 class="title">BibTeX</h2>
+                <pre><code>
+@article{koehler2025neural,
+    title={Neural Emulator Superiority: When Machine Learning for {PDE}s Surpasses its Training Data},
+    author={Felix Koehler and Nils Thuerey},
+    journal={Advances in Neural Information Processing Systems (NeurIPS)},
+    volume={39},
+    year={2025}
+}
+                </code></pre>
+            </div>
+        </section>
+
+
+        <footer class="footer">
+            <div class="container">
+                <!-- <div class="content has-text-centered">
+                    <a class="icon-link" href="https://arxiv.org/pdf/2411.00180">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                    <a class="icon-link" href="https://github.com/Ceyron" class="external-link" disabled>
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div> -->
+                <div class="columns is-centered">
+                    <div class="column is-8">
+                        <div class="content">
+                            <p>
+                                Website source code borrowed from <a href="https://keunhong.com">Keunhong Park</a>'s <a
+                                    href="https://github.com/nerfies/nerfies.github.io">Nerfies website</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+
+    </html>
