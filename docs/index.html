@@ -14,6 +14,8 @@
 
         <link rel="stylesheet" href="static/css/style.css">
         <script src="static/js/script.js"></script>
+
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     </head>
 
     <body>
@@ -174,6 +176,219 @@
                             neural emulators might achieve greater physical
                             fidelity than their training source within specific
                             operational regimes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- Simulation is Imperfect. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">The Simulation Trade-Off: Accurate vs. Fast</h2>
+                        <div class="content has-text-justified">
+                            <video  loop autoplay muted style="width: 100%;">
+                                <source src="static/img/advection_comparison.webm" type="video/webm"/>
+                            </video>
+                        </div>
+                        <div class="content has-text-justified">
+                            Simulating physical systems governed by Partial
+                            Differential Equations (PDEs) involves a fundamental
+                            trade-off between accuracy and computational cost.
+                            While we have highly accurate numerical solvers (the
+                            'fine P' ✅ in our paper), they can be incredibly
+                            slow. For many applications, we rely on faster,
+                            'coarse P' 🚀 solvers. These solvers often introduce
+                            errors, like the <b>numerical diffusion</b> seen
+                            here, which makes the simulation appear blurry. This
+                            is an accepted compromise to make simulations
+                            computationally tractable.
+                        </div>
+
+                        <div class="content has-text-justified has-text-centered">
+                            <p class="has-text-centered is-size-4">High Accuracy ≈ High Computational Cost</p>
+                        </div>
+<!-- 
+                            Numerical Simulation of physical phenomena is the art of balancing accuracy and computational budget.
+
+
+                            - numerical diffusion ...
+                            - but this is often accepted, since there is a trade-off between accuracy and computational cost
+                            - too make simulations tractable
+                            - many algorithms (e.g., reduced models or in computer graphics) even purposely introduce tricks to reduce cost or ensure stability -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- Neural Networks are believed to be bounded. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">The Conventional Wisdom: An Emulator is Limited by its Teacher</h2>
+                        <div class="content has-text-justified">
+                            The standard approach for building a neural emulator
+                            is to train it to mimic a simulator. The prevailing
+                            assumption is that the emulator's accuracy is
+                            fundamentally capped by the fidelity of the training
+                            data. If you train a network on blurry data from a
+                            coarse solver, you expect to get a blurry model. In
+                            other words, the emulator can't be better than its
+                            teacher.
+                        </div>
+                        <div class="content has-text-justified has-text-centered">
+                            <p class="has-text-centered is-size-4">
+                                Error(Emulator 🤖) ≥ Error(Training Data 🚀)<br>
+                                (This is the assumption we challenge)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- This overlooks something. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">The Surprising Truth: Outperforming the Training Data</h2>
+                        <div class="content has-text-justified">
+                            <video  loop autoplay muted style="width: 100%;">
+                                <source src="static/img/advection_comparison_with_network.webm" type="video/webm"/>
+                            </video>
+                        </div>
+                        <div class="content has-text-justified">
+                            However, this conventional wisdom overlooks crucial
+                            details. We demonstrate that a neural emulator,
+                            trained purely on low-fidelity data, can produce
+                            results that are more accurate than that data. As
+                            the video shows, our emulator learns to produce a
+                            sharper, more physically realistic simulation than
+                            the coarse solver it was trained on. How is this
+                            possible?
+                            <ol>
+                                <li><b>Inductive Biases:</b> Neural network
+                                architectures aren't blank slates. A
+                                Convolutional Neural Network (ConvNet), for
+                                example, has a natural preference for local
+                                patterns. This "bias" acts as a regularizer,
+                                implicitly filtering out the structured errors
+                                of the coarse solver.</li>
+                                <li><b>Different Goals:</b> Training and
+                                evaluation are different. We train the emulator
+                                to predict the next single step perfectly. But
+                                we evaluate it over a long, multi-step
+                                "rollout." The emulator can learn dynamics with
+                                more favorable error accumulation properties,
+                                making it more accurate in the long run than the
+                                coarse solver.</li>
+                            </ol>
+                            We define the Superiority Ratio (ξ) to measure this
+                            effect. When ξ < 1, the emulator is superior to its
+                            training data.
+
+                            $$\xi = \frac{\text{Error(🤖 Emulator vs. ✅ Ground Truth)}}{\text{Error(🚀 Training Data vs. ✅ Ground Truth)}}$$
+
+                            <!-- - Differences between training objective and inference task:
+                                - In Metric
+                                - In rollout length
+                                - And in state space
+                            - Networks have inductive bias, often ones that resemble numerical methods:
+                                - While faithfully reproducing the training objective ... -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- Existence of Superiority proven spectrally. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">The Evidence Part 1: Theoretical Proof</h2>
+                        <div class="content has-text-justified">
+                            This isn't just an empirical trick. For fundamental
+                            linear PDEs (Advection, Diffusion, and Poisson), we
+                            can prove the existence of superiority
+                            mathematically. Using Fourier analysis, we show
+                            exactly how an emulator's simple functional form
+                            (its inductive bias) allows it to generalize better
+                            than the more complex, but imperfect, numerical
+                            solver it was trained on.
+                        </div>
+                        <div class="content has-text-justified">
+                            <img src="static/img/advection_superiority_analysis_reduced.svg" style="width: 100%;"/>
+                        </div>
+                        <div class="content has-text-justified">
+                            The plot shows the superiority ratio (y-axis) across
+                            different frequency modes (x-axis) when emulating
+                            the advection equation. When the line dips below
+                            1.0, the emulator is more accurate than its training
+                            data for those frequencies. 'Forward superiority'
+                            occurs when the emulator, trained on low-frequency
+                            information (ψ), generalizes to be more accurate at
+                            high frequencies (φ).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- Also holds experimentally. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">The Evidence Part 2: Experimental Validation</h2>
+                        <div class="content has-text-justified">
+                            <!-- - Inductive Bias is important (the better fit or more closer the functional form is to the best available PDE solver, the better)
+                            - For Picard problem, needs to learn in the smooth regime to get the spectral generalization -->
+                            The principle of emulator superiority also holds in
+                            practice for complex, nonlinear PDEs like the
+                            Burgers' equation and across a wide range of modern
+                            neural network architectures. We found that
+                            architectures with strong spatial or spectral
+                            inductive biases (like ConvNets and Fourier Neural
+                            Operators) are particularly effective at achieving
+                            superiority. This confirms that inductive bias is a
+                            key ingredient.
+                        </div>
+                        <div class="content has-text-justified">
+                            Fore more details, please refer to the full paper.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- So what. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Why This Matters: A New Perspective on Benchmarking</h2>
+                        <div class="content has-text-justified">
+                            Many current benchmarks for neural PDE solvers use
+                            data from numerical simulators as the ground truth.
+                            Since imperfections in simulation algorithms are
+                            unavoidable, they permeate into datasets. Our work
+                            shows this can be misleading. A superior emulator
+                            that correctly learns the underlying physics might
+                            be unfairly penalized for <i>not</i>
+                            reproducing the numerical errors of the flawed
+                            reference data.
+                            <ol>
+                                <li>When benchmarking neural emulators, it's
+                                crucial to consider the fidelity of the training
+                                data. Evaluations should ideally be against
+                                higher-fidelity references to truly assess physical
+                                accuracy.</li>
+                                <li>Designing benchmarks that account for the
+                                potential superiority of emulators can lead to
+                                more meaningful assessments of their capabilities.
+                                This might involve using experimental data or
+                                high-fidelity simulations as ground truth where
+                                possible.</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
