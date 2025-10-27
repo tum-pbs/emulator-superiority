@@ -68,3 +68,19 @@ which also produces:
 Moreover, [this notebook](experiments/analyze_picard_iterations.ipynb) produces this:
 
 - [Figure 13](experiments/picard_analysis.pdf)
+
+### Ablational Experiments
+
+- [Table 1](experiments/theoretical_advection_experiments_multi_mode.ipynb):
+  experimental validation of the theoretical results on advection with multiple
+  frequency modes in the training distribution.
+- [Table 2](experiments/advection_experiment_evaluation_convnet_composition.ipynb):
+  effect of receptive field of the ConvNet emulator architecture on superiority.
+- [Table 3](experiments/advection_experiment_evaluation_fno_composition.ipynb):
+  effect of the FNO's active modes on superiority.
+- [Table 4](experiments/burgers_experiment_evaluation_varying_p_iters.ipynb):
+  effect of the number of Picard iterations (i.e., its "fidelity") in the coarse
+  solver on superiority.
+- [Table 5](experiments/burgers_experiment_evaluation_additional_architectures.ipynb):
+  extended Burgers experiments with additional architectures (ConvNet, Dilated
+  ResNet, FNO, Transformer, & UNet).
