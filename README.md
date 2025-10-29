@@ -4,7 +4,7 @@
 
 ## Paper
 
-- [Arxiv]() (coming soon...)
+- [Arxiv](https://arxiv.org/abs/2510.23111)
 - [Neurips 2025](https://neurips.cc/virtual/2025/poster/116770)
 
 ## Code & Reproducibility Resources
