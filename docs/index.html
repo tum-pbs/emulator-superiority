@@ -354,7 +354,21 @@
                             key ingredient.
                         </div>
                         <div class="content has-text-justified">
-                            Fore more details, please refer to the full paper.
+                            <img src="static/img/burgers_experiment.png" style="width: 100%;"/>
+                        </div>
+                        <div class="content has-text-justified">
+                            A common approximation strategy for simulating
+                            fluid-related phenomena with implicit time
+                            integration is to truncate the nonlinear solver
+                            iterations. While this greatly speeds up the
+                            simulation time, it can lead to nonlinear phenomena
+                            being not fully resolved, like the incorrect
+                            shock propagation in the Burgers example above (a).
+                            Surprisingly, a UNet emulator <i>when trained only
+                            on this coarse data</i> learns a better shock
+                            propagation (b) more in line with the resolved
+                            high-fidelity solution (c), leading to superiority
+                            in the rollout (d).
                         </div>
                     </div>
                 </div>
